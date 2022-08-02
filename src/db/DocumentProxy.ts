@@ -18,6 +18,7 @@ export type DocumentWrapper<DocType, Methods extends DocumentMethodObject<DocTyp
 function getDatabaseMethods<DocType extends Record<string, any>>(schema: JSONSchema4, collection: mongodb.Collection<DocType>) {
   return {
     toJSON(this: ProxiedDocOf<DocType>) { return this.__$_obj; },
+    toBSON(this: ProxiedDocOf<DocType>) { return this.__$_obj; },
     toObject(this: ProxiedDocOf<DocType>) { return this.__$_obj; },
     // We have decided not to support this currently; we may change our minds later.
     // save(this: ProxiedDocOf<DocType>, options: mongodb.FindOneAndReplaceOptions = {}) { 
