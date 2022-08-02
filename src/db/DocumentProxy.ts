@@ -19,13 +19,14 @@ function getDatabaseMethods<DocType extends Record<string, any>>(schema: JSONSch
   return {
     toJSON(this: ProxiedDocOf<DocType>) { return this.__$_obj; },
     toObject(this: ProxiedDocOf<DocType>) { return this.__$_obj; },
-    save(this: ProxiedDocOf<DocType>, options: mongodb.FindOneAndReplaceOptions = {}) { 
-      const target = this.__$_obj!;
-      return collection.findOneAndReplace({ _id: target._id }, target, {
-        upsert: true,
-        ...options,
-      });
-    },
+    // We have decided not to support this currently; we may change our minds later.
+    // save(this: ProxiedDocOf<DocType>, options: mongodb.FindOneAndReplaceOptions = {}) { 
+    //   const target = this.__$_obj!;
+    //   return collection.findOneAndReplace({ _id: target._id }, target, {
+    //     upsert: true,
+    //     ...options,
+    //   });
+    // },
   };
 }
 
