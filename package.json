@@ -21,7 +21,7 @@
   },
   "peerDependencies": {
     "mongodb": "^4.0.0",
-    "tslib": "^2.4.0"
+    "tslib": ">= 2.4.0"
   },
   "devDependencies": {
     "@types/app-root-path": "^1.2.4",

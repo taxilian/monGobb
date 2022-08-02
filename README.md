@@ -54,3 +54,22 @@ While our original plan was to use native typescript type inference to create ou
 we have found that the JSON schema spec is just too complicated to do this reasonably. Instead,
 we are using [json-schema-to-typescript](https://www.npmjs.com/package/json-schema-to-typescript)
 to translate the schema to typescript automatically and have provided a tool to help you do that.
+
+We recommend you use [concurrently](https://www.npmjs.com/package/concurrently) with your
+npm watch script to have it automatically update the generated schema files. This is what our scripts
+look like:
+
+```json
+{
+  "scripts": {
+    "watch": "concurrently --raw npm:watch:schema npm:watch:ts",
+    "watch:schema": "buildJsonSchema ./src",
+    "watch:ts": "tsc -p . --watch --preserveWatchOutput",
+    "start": "concurrently --raw npm:run:ts npm:watch:schema",
+    "run:ts": "tsc-watch --noClear --incremental --onSuccess \"node --inspect=9232 dist/index\" --compiler typescript/bin/tsc",
+  }
+}
+```
+
+There are a lot of ways to do it, but all you really need to do is have `buildJsonSchema` running
+and it will automatically find `**/*.schema.json` and compile them to `**/*.ts`.

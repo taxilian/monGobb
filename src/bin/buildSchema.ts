@@ -1,7 +1,9 @@
+#!/usr/bin/env node -r tslib
+
 import path from 'path';
 import fs from 'fs';
 import chokidar from 'chokidar';
-import jsonToTs from 'json-schema-to-typescript';
+import * as jsonToTs from 'json-schema-to-typescript';
 import appRootPath from 'app-root-path';
 
 const cwd = process.cwd();
@@ -49,17 +51,18 @@ async function processFile(filePath: string, event: string) {
         scriptPath,
       }),
     });
-    compiled = compiled.replace(/\{\{FILENAME\}\}/g, schemaPath);
-    compiled += ``;
+    compiled += fileFooter({schemaFile});
     await fs.promises.writeFile(outPath, compiled);
   } catch (err) {
     console.error(`Error processing ${filePath}`, err);
   }
 }
 
-// watcher.on('add', (path, stats) => {
-//   processFile(path, 'add');
-// });
-// watcher.on('change', (path, stats) => {
-//   processFile(path, 'change');
-// });
+watcher.on('add', (path, stats) => {
+  processFile(path, 'add');
+});
+watcher.on('change', (path, stats) => {
+  processFile(path, 'change');
+});
+
+// watcher.
