@@ -1,7 +1,7 @@
 
 // Use this to define keys which should be removed from the json schema before sending it to mongodb
 // for use as a validation document
-const stripKeys = ['tsType'];
+const stripKeys = ['tsType', 'defaultAuto'];
 
 /**
  * This function goes through the json schema object and removes keys (in-place) which

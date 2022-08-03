@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "title": "Consumer",
+  "properties": {
+    "_id": {
+      "bsonType": "objectId",
+      "tsType": "ObjectId",
+      "defaultAuto": true
+    },
+    "uniqueSlug": { "type": "string" },
+    "name": { "type": "string" },
+    "count": { "type": "number" },
+    "perms": {
+      "type": "array",
+      "items": {
+        "enum": ["read", "admin"]
+      }
+    },
+    "pubKey": { "type": "string", "default": "NONE DEFINED" }
+  },
+  "required": ["_id", "uniqueSlug", "name", "perms"],
+  "additionalProperties": false
+}
